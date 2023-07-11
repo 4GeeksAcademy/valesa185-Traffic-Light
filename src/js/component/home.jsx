@@ -1,26 +1,34 @@
 import React from "react";
+import { useState } from "react";
+import "/workspaces/valesa185-Traffic-Light/src/styles/index.css";
+import Light from "./Light";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+function Home() {
+  const colors = ["red", "yellow", "green"];
+  const [lit, setLit] = useState("red");
 
-//create your first component
-const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
-};
+  return (
+    <>
+      <div className="alert alert-warning" role="alert">
+        Puede darle click al semáforo y elegir un color específico o elegir uno
+        al azar con el botón! 
+      </div>
+      <div className="Home">
+        {colors.map((color, index) => {
+          return <Light key={index} color={color} lit={lit} setLit={setLit} />;
+        })}
+      </div>
+      <button
+        className="Boton btn btn-warning"
+        onClick={() => {
+          setLit(colors[Math.floor(Math.random() * colors.length)]);
+          console.log(lit);
+        }}
+      >
+        Cambiar color
+      </button>
+    </>
+  );
+}
 
 export default Home;
